@@ -4,6 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.ecommerce.entity.OrderBillingAdress;
 
+/**
+ * @author MahenderKasarla
+ *
+ */
 public interface OrderBillingAdressRepository extends JpaRepository<OrderBillingAdress, Long> {
 
 }

@@ -1,69 +1,70 @@
 package com.example.ecommerce.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.ecommerce.dto.OrderDto;
-import com.example.ecommerce.entity.Order;
 import com.example.ecommerce.model.OrderVO;
-import com.example.ecommerce.repository.OrderRepository;
-import com.example.ecommerce.util.RandomGeneratorService;
 
+/**
+ * @author MahenderKasarla
+ *
+ */
 @Service
-public class OrderService {
+public interface OrderService {
 
-	@Autowired
-	public OrderService(OrderRepository orderRepository, OrderDto orderDto, RandomGeneratorService rgService) {
-		super();
-		this.orderRepository = orderRepository;
-		this.orderDto = orderDto;
-		this.rgService = rgService;
-	}
+	/**
+	 * gets all the records
+	 *
+	 * @return
+	 */
+	List<OrderVO> findAll();
 
-	private final OrderRepository orderRepository;
+	/**
+	 * gets the order record based on orderId
+	 *
+	 * @param orderId
+	 * @return
+	 */
+	OrderVO findById(String orderId);
 
-	private final OrderDto orderDto;
+	/**
+	 * creates order record
+	 *
+	 * @param order
+	 * @return
+	 */
+	OrderVO createOrder(OrderVO order);
 
-	private final RandomGeneratorService rgService;
+	/**
+	 * updates given record based on orderId
+	 *
+	 * @param order
+	 * @param orderId
+	 * @return
+	 */
+	OrderVO updateOrder(OrderVO order, String orderId);
 
-	public List<OrderVO> findAll() {
-		return orderDto.getOrderVOs(orderRepository.findAll());
-	}
+	/**
+	 * deletes order record based on orderId
+	 *
+	 * @param orderId
+	 */
+	void deleteByOrderId(String orderId);
 
-	public OrderVO findById(String orderId) {
-		return orderDto.getOrderVO(orderRepository.findByOrderId(orderId));
-	}
+	/**
+	 * saves batch of order records
+	 *
+	 * @param orders
+	 * @return
+	 */
+	List<OrderVO> saveAll(List<OrderVO> orders);
 
-	public OrderVO save(OrderVO order) {
-		Order orderEntity = orderDto.getEntityOrder(order);
-		orderEntity.setOrderId(rgService.generateRandomString());
-		return orderDto.getOrderVO(orderRepository.save(orderEntity));
-	}
-
-	public OrderVO updateOrder(OrderVO order, String orderId) {
-		Order entityOrder = orderRepository.findByOrderId(orderId);
-		return orderDto.getOrderVO(orderRepository.saveAndFlush(orderDto.getEntityOrder(entityOrder, order)));
-	}
-
-	public void deleteByOrderId(String orderId) {
-		orderRepository.deleteByOrderId(orderId);
-	}
-
-	public List<OrderVO> saveAll(List<OrderVO> orders) {
-		return orderDto.getOrderVOs(orderRepository.saveAll(orderDto.getEntityOrders(orders)));
-	}
-
-	public List<OrderVO> updateBatchOrders(List<OrderVO> orders) {
-		List<Order> entityOrders = new ArrayList<Order>();
-		for (OrderVO order : orders) {
-			Order entityOrder = orderRepository.findByOrderId(order.getOrderId());
-			entityOrder = orderDto.getEntityOrder(entityOrder, order);
-			entityOrders.add(entityOrder);
-		}
-		return orderDto.getOrderVOs(orderRepository.saveAll(entityOrders));
-	}
-
+	/**
+	 * updates batch of order records
+	 *
+	 * @param orders
+	 * @return
+	 */
+	List<OrderVO> updateBatchOrders(List<OrderVO> orders);
 }

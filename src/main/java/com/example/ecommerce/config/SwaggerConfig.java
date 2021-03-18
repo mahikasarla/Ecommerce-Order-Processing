@@ -31,6 +31,9 @@ public class SwaggerConfig {
 
 	private final List<Parameter> listDocketParameters;
 
+	/**
+	 * configures authorization to swagger end points
+	 */
 	public SwaggerConfig() {
 		// Any parameter or header you want to require for all end_points
 		Parameter oAuthHeader = new ParameterBuilder().name("Authorization").description("JWT Bearer Token")
@@ -41,6 +44,11 @@ public class SwaggerConfig {
 		// listDocketParameters.add(oAuthHeader);
 	}
 
+	/**
+	 * configures swagger to required classes
+	 *
+	 * @return {@link Docket}
+	 */
 	@Bean
 	public Docket bridgeAllApi() {
 		return new Docket(DocumentationType.SWAGGER_2).globalOperationParameters(listDocketParameters).groupName("all")
@@ -48,12 +56,22 @@ public class SwaggerConfig {
 				.paths(PathSelectors.ant("/**")).build().forCodeGeneration(true).apiInfo(metaData());
 	}
 
+	/**
+	 * creates swagger properties
+	 *
+	 * @return {@link PropertySourcesPlaceholderConfigurer}
+	 */
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer swaggerProperties() {
 		PropertySourcesPlaceholderConfigurer properties = new PropertySourcesPlaceholderConfigurer();
 		return properties;
 	}
 
+	/**
+	 * adds metadata API
+	 *
+	 * @return {@link ApiInfo}
+	 */
 	private ApiInfo metaData() {
 		return new ApiInfoBuilder().title("ecommerce").build();
 	}

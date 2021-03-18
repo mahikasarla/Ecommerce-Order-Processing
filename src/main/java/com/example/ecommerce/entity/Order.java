@@ -17,6 +17,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * @author MahenderKasarla
+ *
+ */
 @Entity
 @Table(name = "item_order")
 @Getter

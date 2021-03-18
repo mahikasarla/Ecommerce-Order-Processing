@@ -13,6 +13,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * @author MahenderKasarla
+ *
+ */
 @Entity
 @Table(name = "order_shipping_address")
 @Getter

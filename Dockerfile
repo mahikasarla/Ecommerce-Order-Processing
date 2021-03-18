@@ -1,7 +1,7 @@
 FROM openjdk:11-jdk
 
 
-ADD ecommerce.jar /
+ADD build/libs/ecommerce.jar /
 ADD start.sh /
 
 RUN chmod 755 /start.sh

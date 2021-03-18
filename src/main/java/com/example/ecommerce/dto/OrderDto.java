@@ -12,9 +12,19 @@ import com.example.ecommerce.model.OrderBillingAdressVO;
 import com.example.ecommerce.model.OrderShippingAdressVO;
 import com.example.ecommerce.model.OrderVO;
 
+/**
+ * @author MahenderKasarla
+ *
+ */
 @Service
 public class OrderDto {
 
+	/**
+	 * transfers List of Order's to List of orderVO's
+	 *
+	 * @param orderEntities
+	 * @return List of {@link OrderVO}
+	 */
 	public List<OrderVO> getOrderVOs(List<Order> orderEntities) {
 		List<OrderVO> orders = new ArrayList<OrderVO>();
 		for (Order orderEntity : orderEntities) {
@@ -23,6 +33,12 @@ public class OrderDto {
 		return orders;
 	}
 
+	/**
+	 * transfers Order to OrderVO
+	 *
+	 * @param order
+	 * @return {@link OrderVO}
+	 */
 	public OrderVO getOrderVO(Order order) {
 		OrderVO orderVO = new OrderVO();
 		orderVO.setOrderId(order.getOrderId());
@@ -42,6 +58,13 @@ public class OrderDto {
 		return orderVO;
 	}
 
+	/**
+	 * transfer OrderShippingAdress to OrderShippingAdressVO
+	 *
+	 * @param orderShippingAdress
+	 *
+	 * @return {@link OrderShippingAdressVO}
+	 */
 	private OrderShippingAdressVO convertToShippingAddressVO(OrderShippingAdress orderShippingAdress) {
 		OrderShippingAdressVO orderShippingAdressVO = new OrderShippingAdressVO();
 		orderShippingAdressVO.setOrderShippingAddressline1(orderShippingAdress.getOrderShippingAddressline1());
@@ -52,6 +75,13 @@ public class OrderDto {
 		return orderShippingAdressVO;
 	}
 
+	/**
+	 * transfer OrderBillingAdress to OrderBillingAdressVO
+	 *
+	 * @param orderBillingAdressVO
+	 *
+	 * @return {@link OrderBillingAdressVO}
+	 */
 	private OrderBillingAdressVO convertToBillingAddressVO(OrderBillingAdress orderBillingAdress) {
 		OrderBillingAdressVO orderBillingAdressVO = new OrderBillingAdressVO();
 		orderBillingAdressVO.setOrderBillingAddressline1(orderBillingAdress.getOrderBillingAddressline1());
@@ -62,20 +92,39 @@ public class OrderDto {
 		return orderBillingAdressVO;
 	}
 
-	public Order getEntityOrder(OrderVO order) {
+	/**
+	 * transfers OrderVO to Order
+	 *
+	 * @param orderVO
+	 * @return {@link Order}
+	 */
+	public Order getEntityOrder(OrderVO orderVO) {
 		Order orderEntity = new Order();
-		return getEntityOrder(orderEntity, order);
+		return getEntityOrder(orderEntity, orderVO);
 	}
 
-	public List<Order> getEntityOrders(List<OrderVO> orders) {
+	/**
+	 * transfers List of OrderVO to List of Order
+	 *
+	 * @param orderVOs
+	 * @return {@link Order}
+	 */
+	public List<Order> getEntityOrders(List<OrderVO> orderVOs) {
 		List<Order> orderEntities = new ArrayList<Order>();
-		for (OrderVO order : orders) {
+		for (OrderVO order : orderVOs) {
 			Order orderEntity = new Order();
 			orderEntities.add(getEntityOrder(orderEntity, order));
 		}
 		return orderEntities;
 	}
 
+	/**
+	 * updates order object from orderVO
+	 *
+	 * @param entityOrder
+	 * @param orderVO
+	 * @return {@link Order}
+	 */
 	public Order getEntityOrder(Order entityOrder, OrderVO orderVO) {
 		entityOrder.setOrderId(orderVO.getOrderId());
 		entityOrder.setOrderCustomerId(orderVO.getOrderCustomerId());
@@ -94,6 +143,12 @@ public class OrderDto {
 		return entityOrder;
 	}
 
+	/**
+	 * converts orderShippingAdressVO to orderShippingAdress
+	 *
+	 * @param orderShippingAdressVO
+	 * @return {@link OrderBillingAdressVO}
+	 */
 	private OrderShippingAdress convertToShippingAddress(OrderShippingAdressVO orderShippingAdressVO) {
 		OrderShippingAdress orderShippingAdress = new OrderShippingAdress();
 		orderShippingAdress.setOrderShippingAddressline1(orderShippingAdressVO.getOrderShippingAddressline1());
@@ -104,6 +159,12 @@ public class OrderDto {
 		return orderShippingAdress;
 	}
 
+	/**
+	 * converts orderBillingAdressVO to orderBillingAdress
+	 *
+	 * @param orderBillingAdressVO
+	 * @return {@link OrderBillingAdress}
+	 */
 	private OrderBillingAdress convertToBillingAddress(OrderBillingAdressVO orderBillingAdressVO) {
 		OrderBillingAdress orderBillingAdress = new OrderBillingAdress();
 		orderBillingAdress.setOrderBillingAddressline1(orderBillingAdressVO.getOrderBillingAddressline1());

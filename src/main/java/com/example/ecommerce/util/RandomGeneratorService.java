@@ -7,19 +7,27 @@ import java.security.SecureRandom;
 
 import org.springframework.stereotype.Service;
 
+/**
+ * @author MahenderKasarla
+ *
+ */
 @Service
 public class RandomGeneratorService {
 
 	private final String randomString = "12345efghjkmnpqrGHJKMNPstuvw6789abcdxyzABCDEFQRSTUVWXYZ";
 
-	public String generateRandomString() {
+	/**
+	 * generates random string based on given length
+	 *
+	 * @param maxLengthOfString
+	 * @return
+	 */
+	public String generateRandomString(int maxLengthOfString) {
 
 		SecureRandom rand = new SecureRandom();
 		StringBuilder rs = new StringBuilder();
 
-		int maximumTransactionIdLength = 6;
-
-		for (int i = 0; i < maximumTransactionIdLength; i++) {
+		for (int i = 0; i < maxLengthOfString; i++) {
 			int randIndex = rand.nextInt(randomString.length());
 			rs.append(randomString.charAt(randIndex));
 		}
