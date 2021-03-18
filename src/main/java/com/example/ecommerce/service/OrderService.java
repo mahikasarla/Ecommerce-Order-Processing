@@ -16,13 +16,18 @@ import com.example.ecommerce.util.RandomGeneratorService;
 public class OrderService {
 
 	@Autowired
-	private OrderRepository orderRepository;
+	public OrderService(OrderRepository orderRepository, OrderDto orderDto, RandomGeneratorService rgService) {
+		super();
+		this.orderRepository = orderRepository;
+		this.orderDto = orderDto;
+		this.rgService = rgService;
+	}
 
-	@Autowired
-	private OrderDto orderDto;
+	private final OrderRepository orderRepository;
 
-	@Autowired
-	private RandomGeneratorService rgService;
+	private final OrderDto orderDto;
+
+	private final RandomGeneratorService rgService;
 
 	public List<OrderVO> findAll() {
 		return orderDto.getOrderVOs(orderRepository.findAll());
