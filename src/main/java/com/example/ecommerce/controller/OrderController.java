@@ -60,15 +60,14 @@ public class OrderController {
 		return response;
 	}
 
-	@PostMapping("/orders")
+	@PostMapping("/batch-orders")
 	@ResponseBody
 	public List<OrderVO> createBatchOrders(@RequestBody List<OrderVO> orders) {
 		return orderService.saveAll(orders);
 	}
 
-	@PutMapping("/orders/{id}")
-	public ResponseEntity<List<OrderVO>> updatebatchOrders(@PathVariable(value = "id") Long orderId,
-			@RequestBody List<OrderVO> orderDetails) {
+	@PutMapping("/batch-orders")
+	public ResponseEntity<List<OrderVO>> updatebatchOrders(@RequestBody List<OrderVO> orderDetails) {
 		List<OrderVO> order = orderService.updateBatchOrders(orderDetails);
 		return ResponseEntity.ok(order);
 	}

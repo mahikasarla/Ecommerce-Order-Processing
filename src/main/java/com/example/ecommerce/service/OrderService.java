@@ -10,6 +10,7 @@ import com.example.ecommerce.dto.OrderDto;
 import com.example.ecommerce.entity.Order;
 import com.example.ecommerce.model.OrderVO;
 import com.example.ecommerce.repository.OrderRepository;
+import com.example.ecommerce.util.RandomGeneratorService;
 
 @Service
 public class OrderService {
@@ -20,6 +21,9 @@ public class OrderService {
 	@Autowired
 	private OrderDto orderDto;
 
+	@Autowired
+	private RandomGeneratorService rgService;
+
 	public List<OrderVO> findAll() {
 		return orderDto.getOrderVOs(orderRepository.findAll());
 	}
@@ -29,7 +33,9 @@ public class OrderService {
 	}
 
 	public OrderVO save(OrderVO order) {
-		return orderDto.getOrderVO(orderRepository.save(orderDto.getEntityOrder(order)));
+		Order orderEntity = orderDto.getEntityOrder(order);
+		orderEntity.setOrderId(rgService.generateRandomString());
+		return orderDto.getOrderVO(orderRepository.save(orderEntity));
 	}
 
 	public OrderVO updateOrder(OrderVO order, String orderId) {

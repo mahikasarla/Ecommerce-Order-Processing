@@ -34,6 +34,9 @@ dependencies {
     compile ('org.springframework.kafka:spring-kafka'){
         exclude module: "spring-boot-starter-logging"
     } 
+    compile ('org.springframework.boot:spring-boot-starter-security'){
+        exclude module: "spring-boot-starter-logging"
+     }
     
 	compile ('org.springframework.boot:spring-boot-starter-log4j2'){
         exclude module: "spring-boot-starter-logging"
@@ -42,8 +45,11 @@ dependencies {
     compile ('org.springframework.boot:spring-boot-starter-data-redis:2.2.4.RELEASE'){
         exclude module: "spring-boot-starter-logging"
     }
+
+    compile('org.springframework.boot:spring-boot-starter-oauth2-client'){
+        exclude module: "spring-boot-starter-logging"
+    }
     
-    compile ('io.lettuce:lettuce-core:5.2.1.RELEASE')
     compile ("io.springfox:springfox-swagger-ui:2.9.2")
     compile ("io.springfox:springfox-swagger2:2.9.2")
 	compile ("com.amazonaws:aws-java-sdk-s3:1.11.601")
