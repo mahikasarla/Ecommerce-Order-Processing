@@ -126,7 +126,6 @@ public class OrderDto {
 	 * @return {@link Order}
 	 */
 	public Order getEntityOrder(Order entityOrder, OrderVO orderVO) {
-		entityOrder.setOrderId(orderVO.getOrderId());
 		entityOrder.setOrderCustomerId(orderVO.getOrderCustomerId());
 		entityOrder.setOrderItemName(orderVO.getOrderItemName());
 		entityOrder.setOrderItemQty(orderVO.getOrderItemQty());

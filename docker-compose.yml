@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   ecommerce-api:
-    image: ecommerce
+    image: mahikasarla/ecommerce-order
     container_name: ecommerce
     hostname: ecommerce
     ports:
@@ -17,7 +17,7 @@ services:
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
     ports:
-          - 5442:5442
+          - 5432:5432
     environment:
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: password

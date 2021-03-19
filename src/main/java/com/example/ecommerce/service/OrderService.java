@@ -3,6 +3,7 @@ package com.example.ecommerce.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.ecommerce.model.OrderVO;
 
@@ -11,6 +12,7 @@ import com.example.ecommerce.model.OrderVO;
  *
  */
 @Service
+@Transactional
 public interface OrderService {
 
 	/**

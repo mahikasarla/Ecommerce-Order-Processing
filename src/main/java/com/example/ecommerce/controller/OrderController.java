@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ecommerce.exceptions.OrderNotfoundException;
 import com.example.ecommerce.model.OrderVO;
 import com.example.ecommerce.service.OrderService;
 
@@ -57,10 +58,11 @@ public class OrderController {
 
 	@DeleteMapping("/orders/{id}")
 	@ApiOperation(value = "deletes the order based on order-id", response = HttpResponse.class)
-	public ResponseEntity<Map<String, Boolean>> deleteOrder(@PathVariable(value = "id") String orderId) {
+	public ResponseEntity<Map<String, Boolean>> deleteOrder(@PathVariable(value = "id") String orderId)
+			throws OrderNotfoundException {
 		orderService.deleteByOrderId(orderId);
 		Map<String, Boolean> response = new HashMap<>();
-		response.put("cancelled", Boolean.TRUE);
+		response.put("deleted the record", Boolean.TRUE);
 		return ResponseEntity.ok().body(response);
 	}
 
@@ -73,6 +75,8 @@ public class OrderController {
 	@PutMapping("/batch-orders")
 	@ApiOperation(value = "updates the batch orders", response = HttpResponse.class)
 	public ResponseEntity<List<OrderVO>> updatebatchOrders(@RequestBody List<OrderVO> orderDetails) {
+		// here you have to get the orderId's in request orders in order to update the
+		// orders
 		List<OrderVO> order = orderService.updateBatchOrders(orderDetails);
 		return ResponseEntity.ok().body(order);
 	}
