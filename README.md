@@ -9,7 +9,7 @@
 		3.run docker build -t ecommerce-order . --no-cache
 		4.then update ecommerce-api:image:mahikasarla/ecommerce-order to ecommerce-order  in docker-compse.yml file  
 		5.then run the cmd line docker-compose up -d
-	# How to run my docker-hub image navigate to project root folder
+	# How to run my docker-hub image navigate to project root folder(my docker image url: https://hub.docker.com/repository/docker/mahikasarla/ecommerce-order)
 		1.jsut run the docker-compose up -d
 	# How to test the application
 		1.please refer swagger for request response(swagger url: http://localhost:8080/ecommerce/swagger-ui.html)
